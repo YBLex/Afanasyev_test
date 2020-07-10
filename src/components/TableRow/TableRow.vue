@@ -1,5 +1,5 @@
 <template>
-  <tr class="table__raw">
+  <tr class="table__row">
     <td class="table__cell table__cell--left">{{ employee.name }}</td>
     <td class="table__cell table__cell--right">{{ employee.tel }}</td>
   </tr>
@@ -7,8 +7,8 @@
 
 <script>
 export default {
-  name: 'TableRaw',
-  
+  name: 'TableRow',
+
   props: ['employee'],
 };
 </script>

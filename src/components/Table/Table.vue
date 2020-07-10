@@ -1,38 +1,46 @@
 <template>
   <section class="table">
     <add-employee-button></add-employee-button>
-    <table class="table__main" v-if="employeeList.length">
+    <table
+      class="table__main"
+      v-if="employeeList.length"
+      key="app-table"
+    >
       <thead>
-        <tr class="table__raw">
+        <tr class="table__row">
           <th class="table__cell table__cell--left table__cell--main">Name</th>
           <th class="table__cell table__cell--right table__cell--main">Contact</th>
         </tr>
       </thead>
       <tbody>
-        <table-raw
-          v-for="employee in employeeList"
+        <table-row
+          v-for="(employee, index) in employeeList"
           :employee="employee"
-          :key="employee.id"></table-raw>
+          :key="index"
+        ></table-row>
       </tbody>
     </table>
     <div
       class="start-use"
-      v-else>Create your first table! Press the <span class="highlight-blue">Add Button</span>!
+      v-else
+      key="app-description"
+    >
+      Create your first table! Press the <span class="highlight-blue">Add Button</span>!
     </div>
   </section>
 </template>
 
 <script>
-import TableRaw from '../TableRaw/TableRaw.vue';
+import TableRow from '../TableRow/TableRow.vue';
 import AddEmployeeButton from '../AddEmployeeButton/AddEmployeeButton.vue';
 import { extractLocalData, writeLocalData } from '../../js/local_storage.js';
 import eventBus from '../../js/event_bus.js';
 
 export default {
-  name: 'Table',
+  name: 'AppTable',
 
   components: {
-    TableRaw,
+    TableRow,
     AddEmployeeButton,
   },
 
@@ -47,10 +55,10 @@ export default {
       employeeList: extractLocalData() || [],
     };
   },
+
   watch: {
     employeeList: {
       handler() {
-        console.log('userList changed!');
         writeLocalData(this.employeeList);
       },
       deep: true,
@@ -74,7 +82,7 @@ export default {
 }
 
 .table__main,
-.table__raw,
+.table__row,
 .table__cell {
   border: 2px solid #ff7e2a;
   color: #8a8a8a;

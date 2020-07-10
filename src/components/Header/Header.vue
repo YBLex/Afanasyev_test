@@ -6,7 +6,8 @@
 
 <script>
 export default {
-  name: 'app-header',
+  name: 'AppHeader',
+  
   data() {
     return {
       title: 'Hello 👋🏼!!! This is a Roistat frontend test task!!',
@@ -21,7 +22,6 @@ export default {
 }
 .main-header__title {
   margin: 0 auto;
-  max-width: 200vh;
   text-align: center;
   color: #038cd5;
   font-size: 36px;

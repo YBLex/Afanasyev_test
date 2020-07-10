@@ -4,14 +4,17 @@
     v-if="isShown">
     <h2 class="visually-hidden">Add employee form</h2>
     <div class="overlay" @click="onCloseForm"></div>
-    <form class="add-form__form" v-if="isShown">
+    <form
+      class="add-form__form"
+      v-if="isShown"
+    >
       <div class="add-form__input-control">
         <label
           class="add-form__label"
           for="name">Имя сотрудника</label>
         <input
-          class="add-form__input"
           id="name"
+          class="add-form__input"
           type="text"
           placeholder="Введите имя" 
           v-model="employeeName">
@@ -19,18 +22,24 @@
       <div class="add-form__input-control">
         <label
           class="add-form__label"
-          for="name">Номер телефона</label>
+          for="tel-number"
+        >Номер телефона</label>
         <input
+          id="tel-number"
           class="add-form__input"
           type="tel"
           placeholder="Введите номер телефона"
-          v-model="employeeTel">
+          v-model="employeeTel"
+        >
       </div>
       <div class="add-form__input-control">
         <button
           type="submit"
           class="add-form__submit"
-          @click.prevent="onSubmitForm">Добавить</button>
+          @click.prevent="onSubmitForm"
+        >
+          Добавить
+        </button>
       </div>
     </form>
   </section>

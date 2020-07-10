@@ -12,6 +12,7 @@ import eventBus from '../../js/event_bus.js';
 
 export default {
   name: 'AddEmployeeButton',
+
   methods: {
     addEmployee() {
       eventBus.$emit('showAddEmployeeForm', true);
