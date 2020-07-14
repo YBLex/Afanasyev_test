@@ -94,6 +94,13 @@ export default {
     addEmployee(employee) {
       this.employeeList.push(employee);
     },
+    addSubordinate(id, child) {
+      this.employeeList.map((employee) => {
+        if (employee.id === id) {
+          employee.children.push(child);
+        }
+      });
+    },
     onSubmitForm() {
       if (this.employeeName && this.employeeTel) {
         if (this.directorID === null) {
@@ -114,13 +121,6 @@ export default {
       }
       this.onCloseForm();
       this.onResetForm();
-    },
-    addSubordinate(id, child) {
-      this.employeeList.map((employee) => {
-        if (employee.id === id) {
-          employee.children.push(child);
-        }
-      });
     },
   },
 };
