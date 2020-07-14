@@ -5,44 +5,44 @@ export default [
     tel: '8 (999) 999-99-99',
     children: [
       {
-        id: 5,
+        id: 2,
         name: 'Misha',
         tel: '8 (888) 888-88-88',
         children: [
           {
-            id: 5,
+            id: 3,
             name: 'Roma',
             tel: '8 (888) 888-88-88',
           },
         ],
       },
       {
-        id: 5,
+        id: 4,
         name: 'Roma',
         tel: '8 (888) 888-88-88',
       },
     ],
   },
   {
-    id: 2,
+    id: 5,
     name: 'Masha',
     tel: '8 (999) 999-99-99',
     children: [],
   },
   {
-    id: 3,
+    id: 6,
     name: 'Andrew',
     tel: '8 (999) 999-99-99',
     children: [],
   },
   {
-    id: 4,
+    id: 7,
     name: 'Nastya',
     tel: '8 (999) 999-99-99',
     children: [],
   },
   {
-    id: 1,
+    id: 8,
     name: 'Sveta',
     tel: '8 (999) 999-99-99',
     children: [],
