@@ -1,25 +1,22 @@
 <template>
   <section class="table">
     <add-employee-button></add-employee-button>
-    <table
+    <div
       class="table__main"
       v-if="employeeList.length"
       key="app-table"
     >
-      <thead>
-        <tr class="table__row">
-          <th class="table__cell table__cell--left table__cell--main">Name</th>
-          <th class="table__cell table__cell--right table__cell--main">Contact</th>
-        </tr>
-      </thead>
-      <tbody>
-        <table-row
-          v-for="(employee, index) in employeeList"
-          :employee="employee"
-          :key="index"
-        ></table-row>
-      </tbody>
-    </table>
+      <div class="table__header table__row">
+        <div class="table__cell table__cell--left">Name</div>
+        <div class="table__cell table__cell--right">Contact</div>
+      </div>
+      <table-row
+        v-for="(employee, index) in employeeList"
+        :employee="employee"
+        :depth="1"
+        :key="index"
+      />
+    </div>
     <div
       class="start-use"
       v-else
@@ -33,7 +30,7 @@
 <script>
 import TableRow from '../TableRow/TableRow.vue';
 import AddEmployeeButton from '../AddEmployeeButton/AddEmployeeButton.vue';
-import { extractLocalData, writeLocalData } from '../../js/local_storage.js';
+import { writeLocalData } from '../../js/local_storage.js';
 import eventBus from '../../js/event_bus.js';
 
 export default {
@@ -44,16 +41,12 @@ export default {
     AddEmployeeButton,
   },
 
+  props: ['employeeList'],
+
   created() {
     eventBus.$on('updatedEmployeeList', (employee) => {
       this.employeeList.push(employee);
     });
-  },
-
-  data() {
-    return {
-      employeeList: extractLocalData() || [],
-    };
   },
 
   watch: {
@@ -81,8 +74,10 @@ export default {
   cursor: pointer;
 }
 
-.table__main,
-.table__row,
+.table__row {
+  display: flex;
+}
+
 .table__cell {
   border: 2px solid #ff7e2a;
   color: #8a8a8a;
@@ -96,9 +91,12 @@ export default {
 
 .table__cell--left {
   width: 40%;
+  border-right: none;
+  border-left: none;
 }
 
 .table__cell--right {
+  border-right: none;
   width: 60%;
 }
 

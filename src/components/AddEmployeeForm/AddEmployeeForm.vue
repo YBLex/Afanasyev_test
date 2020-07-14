@@ -32,6 +32,9 @@
           v-model="employeeTel"
         >
       </div>
+      <add-employee-select
+        :employee-list="employeeList"
+      ></add-employee-select>
       <div class="add-form__input-control">
         <button
           type="submit"
@@ -47,13 +50,26 @@
 
 <script>
 import eventBus from '../../js/event_bus.js';
+import AddEmployeeSelect from '../AddEmployeeSelect/AddEmployeeSelect.vue';
+
+import uniqid from 'uniqid';
 
 export default {
   name: 'AddEmployeeForm',
 
+  components: {
+    AddEmployeeSelect,
+  },
+
+  props: ['employeeList'],
+
   created() {
     eventBus.$on('showAddEmployeeForm', (isShown) => {
       this.isShown = isShown;
+    });
+    eventBus.$on('sendDirecroID', (directorID) => {
+      this.directorID = directorID;
+      console.log('IN FORM', this.directorID);
     });
   },
 
@@ -62,6 +78,7 @@ export default {
       isShown: false,
       employeeName: '',
       employeeTel: '',
+      directorID: null,
     };
   },
 
@@ -76,8 +93,10 @@ export default {
     onSubmitForm() {
       if (this.employeeName && this.employeeTel) {
         eventBus.$emit('updatedEmployeeList', {
+          id: uniqid(),
           name: this.employeeName,
           tel: this.employeeTel,
+          children: [],
         });
       }
       this.onCloseForm();
@@ -99,18 +118,19 @@ export default {
 }
 
 .add-form__form {
-  height: 300px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30%;
+  min-height: 450px;
   margin: 0 auto;
   padding: 20px;
-  transform: translate(0, -50%);
   background: #fff;
   border-radius: 5px;
-  width: 30%;
-  position: relative;
 }
 
 .add-form__form {
-  max-height: 30%;
   overflow: auto;
 }
 
@@ -121,23 +141,33 @@ export default {
 }
 
 .add-form__label {
-  margin-bottom: 10px;
-  font-weight: bold;
-}
-
-.add-form__input {
-  padding: 5px 0;
-  padding-left: 10px;
+  font-size: 20px;
   margin-bottom: 10px;
   font-weight: bold;
   color: #038cd5;
 }
 
+.vs__selected {
+  color: 1px solid rgba(60,60,60,.26);
+}
+
+.add-form__input {
+  padding: 5px 0;
+  font-size: 16px;
+  padding-left: 10px;
+  margin-bottom: 10px;
+  border: 1px solid rgba(60,60,60,.26);
+  font-weight: 400;
+  border-radius: 4px;
+}
+
 .add-form__submit {
+  margin-top: 20px;
   color: #ffffff;
   background-color: #038cd5;
   border: 2px solid #038cd5;
   border-radius: 3px;
   height: 40px;
+  font-size: 18px;
 }
 </style>
