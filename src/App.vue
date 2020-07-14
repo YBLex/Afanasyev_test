@@ -18,11 +18,13 @@ import { extractLocalData } from './js/local_storage.js';
 
 export default {
   name: 'app',
+
   components: {
     'app-header': Header,
     'app-table': Table,
     'add-employee-form': AddEmployeeForm,
   },
+
   data() {
     return {
       employeeList: extractLocalData() || [],

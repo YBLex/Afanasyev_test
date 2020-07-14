@@ -2,14 +2,17 @@
   <div class="add-form__input-control app-select">
     <div
       class="add-form__label"
-    >Начальник</div>
-    <div class="app-select__selector" @click="toggle()">
+    >Manager</div>
+    <div
+      class="app-select__selector"
+      @click="toggle()"
+    >
       <div class="app-select__label">
         <input
           class="app-select__input"
-          placeholder="Выберите начальника для сотрудника"
+          placeholder="Select a manager 🎩"
           v-model="director"
-        >
+        />
       </div>
       <div class="app-select__arrow" :class="{ expanded: visible }"></div>
       <div :class="{ hidden: !visible, visible }">
@@ -105,11 +108,12 @@ export default {
     border: none;
     padding: 12px;
     font-size: 16px;
+    cursor: pointer;
 }
 
 .app-select__list {
     width: 100%;
-    max-height: 168px;
+    max-height: 126px;
     overflow-y: auto;
     list-style-type: none;
     padding: 0;

@@ -31,7 +31,6 @@
 import TableRow from '../TableRow/TableRow.vue';
 import AddEmployeeButton from '../AddEmployeeButton/AddEmployeeButton.vue';
 import { writeLocalData } from '../../js/local_storage.js';
-import eventBus from '../../js/event_bus.js';
 
 export default {
   name: 'AppTable',
@@ -42,12 +41,6 @@ export default {
   },
 
   props: ['employeeList'],
-
-  created() {
-    eventBus.$on('updatedEmployeeList', (employee) => {
-      this.employeeList.push(employee);
-    });
-  },
 
   watch: {
     employeeList: {
