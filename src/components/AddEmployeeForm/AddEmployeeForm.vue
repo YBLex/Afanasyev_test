@@ -11,37 +11,40 @@
       <div class="add-form__input-control">
         <label
           class="add-form__label"
-          for="name">Имя сотрудника</label>
+          for="name"
+        >Employee name</label>
         <input
           id="name"
           class="add-form__input"
           type="text"
-          placeholder="Введите имя" 
-          v-model="employeeName">
+          placeholder="Type employee name 👨🏻‍💻" 
+          v-model="employeeName"
+        />
       </div>
       <div class="add-form__input-control">
         <label
           class="add-form__label"
           for="tel-number"
-        >Номер телефона</label>
+        >Telephone number</label>
         <input
           id="tel-number"
           class="add-form__input"
           type="tel"
-          placeholder="Введите номер телефона"
+          placeholder="Type telephone number ☎️"
           v-model="employeeTel"
-        >
+        />
       </div>
       <add-employee-select
+        v-if="employeeList.length"
         :employee-list="employeeList"
-      ></add-employee-select>
+      />
       <div class="add-form__input-control">
         <button
           type="submit"
           class="add-form__submit"
           @click.prevent="onSubmitForm"
         >
-          Добавить
+          ADD
         </button>
       </div>
     </form>
@@ -51,7 +54,6 @@
 <script>
 import eventBus from '../../js/event_bus.js';
 import AddEmployeeSelect from '../AddEmployeeSelect/AddEmployeeSelect.vue';
-
 import uniqid from 'uniqid';
 
 export default {
@@ -69,7 +71,6 @@ export default {
     });
     eventBus.$on('sendDirecroID', (directorID) => {
       this.directorID = directorID;
-      console.log('IN FORM', this.directorID);
     });
   },
 
@@ -90,17 +91,36 @@ export default {
       this.employeeName = '';
       this.employeeTel = '';
     },
+    addEmployee(employee) {
+      this.employeeList.push(employee);
+    },
     onSubmitForm() {
       if (this.employeeName && this.employeeTel) {
-        eventBus.$emit('updatedEmployeeList', {
-          id: uniqid(),
-          name: this.employeeName,
-          tel: this.employeeTel,
-          children: [],
-        });
+        if (this.directorID === null) {
+          this.addEmployee({
+            id: uniqid(),
+            name: this.employeeName,
+            tel: this.employeeTel,
+            children: [],
+          });
+        } else {
+          this.addSubordinate(this.directorID, {
+            id: uniqid(),
+            name: this.employeeName,
+            tel: this.employeeTel,
+            children: [],
+          });
+        }
       }
       this.onCloseForm();
       this.onResetForm();
+    },
+    addSubordinate(id, child) {
+      this.employeeList.map((employee) => {
+        if (employee.id === id) {
+          employee.children.push(child);
+        }
+      });
     },
   },
 };
@@ -152,7 +172,7 @@ export default {
 }
 
 .add-form__input {
-  padding: 5px 0;
+  padding: 12px;
   font-size: 16px;
   padding-left: 10px;
   margin-bottom: 10px;
