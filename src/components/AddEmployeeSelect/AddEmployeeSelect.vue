@@ -9,19 +9,22 @@
     >
       <div class="app-select__label">
         <input
+          v-model="director"
           class="app-select__input"
           placeholder="Select a manager 🎩"
-          v-model="director"
         />
       </div>
-      <div class="app-select__arrow" :class="{ expanded: visible }"></div>
+      <div
+        class="app-select__arrow"
+        :class="{ expanded: visible }"
+      ></div>
       <div :class="{ hidden: !visible, visible }">
         <ul class="app-select__list">
           <li
-            class="app-select__item"
-            :class="{ current: employee.name === director }"
             v-for="employee in employeeList"
             :key="employee.id"
+            class="app-select__item"
+            :class="{ current: employee.name === director }"
             @click="select(employee)"
           >
             {{ employee.name }}
@@ -53,7 +56,7 @@ export default {
     },
     select({id, name}) {
       this.director = name;
-      eventBus.$emit('sendDirecroID', id);
+      eventBus.$emit('sendDirectorID', id);
     },
   },
 };

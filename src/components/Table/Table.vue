@@ -2,9 +2,9 @@
   <section class="table">
     <add-employee-button></add-employee-button>
     <div
-      class="table__main"
       v-if="employeeList.length"
       key="app-table"
+      class="table__main"
     >
       <div class="table__header table__row">
         <div class="table__cell table__cell--left">Name</div>
@@ -12,15 +12,15 @@
       </div>
       <table-row
         v-for="(employee, index) in employeeList"
+        :key="index"
         :employee="employee"
         :depth="1"
-        :key="index"
       />
     </div>
     <div
-      class="start-use"
       v-else
       key="app-description"
+      class="start-use"
     >
       Create your first table! Press the <span class="highlight-blue">Add Button</span>!
     </div>

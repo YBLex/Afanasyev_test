@@ -1,6 +1,9 @@
 <template>
   <div class="container">
-    <button class="add-button" @click="addEmployee">
+    <button
+      class="add-button"
+      @click="addEmployee"
+    >
       <div class="add-button__animation-layout"></div>
       <div class="add-button__content">+</div>
     </button>

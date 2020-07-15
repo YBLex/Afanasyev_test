@@ -1,12 +1,16 @@
 <template>
   <section
+    v-if="isShown"
     class="add-form"
-    v-if="isShown">
+  >
     <h2 class="visually-hidden">Add employee form</h2>
-    <div class="overlay" @click="onCloseForm"></div>
+    <div
+      class="overlay"
+      @click="onCloseForm"
+    ></div>
     <form
-      class="add-form__form"
       v-if="isShown"
+      class="add-form__form"
     >
       <div class="add-form__input-control">
         <label
@@ -15,10 +19,10 @@
         >Employee name</label>
         <input
           id="name"
+          v-model="employeeName"
           class="add-form__input"
           type="text"
           placeholder="Type employee name 👨🏻‍💻" 
-          v-model="employeeName"
         />
       </div>
       <div class="add-form__input-control">
@@ -28,10 +32,10 @@
         >Telephone number</label>
         <input
           id="tel-number"
+          v-model="employeeTel"
           class="add-form__input"
           type="tel"
           placeholder="Type telephone number ☎️"
-          v-model="employeeTel"
         />
       </div>
       <add-employee-select
@@ -40,8 +44,8 @@
       />
       <div class="add-form__input-control">
         <button
-          type="submit"
           class="add-form__submit"
+          type="submit"
           @click.prevent="onSubmitForm"
         >
           ADD
@@ -69,7 +73,7 @@ export default {
     eventBus.$on('showAddEmployeeForm', (isShown) => {
       this.isShown = isShown;
     });
-    eventBus.$on('sendDirecroID', (directorID) => {
+    eventBus.$on('sendDirectorID', (directorID) => {
       this.directorID = directorID;
     });
   },
@@ -90,6 +94,7 @@ export default {
     onResetForm() {
       this.employeeName = '';
       this.employeeTel = '';
+      this.directorID = null;
     },
     addEmployee(employee) {
       this.employeeList.push(employee);

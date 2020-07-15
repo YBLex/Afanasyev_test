@@ -5,9 +5,9 @@
       <div class="table__cell table__cell--right">{{ employee.tel }}</div>
     </div>
     <div
+      v-if="employee.children && employee.children.length"
       class="table__row-children"
       :style="shift"
-      v-if="employee.children && employee.children.length"
     >
       <table-row
         v-for="child in employee.children"
@@ -53,6 +53,7 @@ export default {
   padding: 10px;
   font-size: 22px;
 }
+
 .table__cell--left {
   width: 40%;
 }
